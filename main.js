@@ -21,6 +21,8 @@ const answerButtonsContainer = document.getElementById("answer-buttons");
 
 //FUNCIONES
 
+//Esta funcion esta conectada al boton start del quiz. Escondel el boton start al clicar y muestra el contenedor con la primera pregunta:
+
 let currentQuestionIndex;
 
 function startGame() {
@@ -45,7 +47,6 @@ axios
   .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
 
-
 //---------------------------------
 //FIXME:   modificar para que me recoja la question de la API.
 //la estructura de question-answer es diferente del ejercicio de clase en la API 
@@ -53,15 +54,31 @@ axios
 //En la API question y answers estan enb el mismo objeto pero la respuesta correcta y las incorrectas por separado
 // Quitar el SETTIMEOUT cuando reorganice el codigo y no lo necesite
 
-setTimeout(() => {
+// lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera: 
+
+function showAnswers(){
+ setTimeout(() => {
     apiData.forEach((element) => { 
-        console.log(element.question)
+        console.log(element.answer)
     }) 
 }, "1000");
+}
 
+showAnswers()
 
+//--------------------------------------------------
 
+function showQuestion(){
+   
+    setTimeout(() => {
+        apiData.forEach((element) => { 
+            questionElement.innerText = element.question
+        }) 
+    }, "1000");
 
+   }
+   
+   showQuestion()
 
 // ejemplo funcion quiz Sofia----------------
 /* function showQuestion(question) {
