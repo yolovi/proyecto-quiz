@@ -4,6 +4,8 @@
 
 //API QUIZ - AXIOS: https://opentdb.com/api.php?amount=10
 
+//TODO: BORRAR todos los COMENTARIOS antes de entregar
+
 //GET_ITEMS
 
 //div Home Page
@@ -30,18 +32,39 @@ function startGame() {
 //---------------------------------------------------
 //Solo para comprobar el dato que nos llega de la Api: 
 
+// axios
+//   .get("https://opentdb.com/api.php?amount=10")
+//   .then((res) => console.log(res.data.results))
+//   .catch((err) => console.error(err));
+
+// metemos la info de la Api en una variable
+let apiData = []
+
 axios
   .get("https://opentdb.com/api.php?amount=10")
-  .then((res) => console.log(res.data.results))
+  .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
+
 
 //---------------------------------
 //FIXME:   modificar para que me recoja la question de la API.
 //la estructura de question-answer es diferente del ejercicio de clase en la API 
 //(result es un array de objetos con cada question, map/forEach?)
 //En la API question y answers estan enb el mismo objeto pero la respuesta correcta y las incorrectas por separado
+// Quitar el SETTIMEOUT cuando reorganice el codigo y no lo necesite
 
-function showQuestion(question) {
+setTimeout(() => {
+    apiData.forEach((element) => { 
+        console.log(element.question)
+    }) 
+}, "1000");
+
+
+
+
+
+// ejemplo funcion quiz Sofia----------------
+/* function showQuestion(question) {
   questionElement.innerText = question.question;
   question.answers.forEach((answer) => {
     const button = document.createElement("button");
@@ -51,7 +74,24 @@ function showQuestion(question) {
     }
     answerButtonsElement.appendChild(button);
   });
+} */
+//--------------------------------------
+
+// ------funcion ejercicio asincronia --- Juanda-----
+/* const showUsers = () => {
+  console.log(users)
+  users.forEach(user => {
+    console.log(user)
+    texto.innerHTML += `<p> ${user.name} </p>`
+  })
 }
+// 5
+const btn = document.getElementById("btn")
+btn.addEventListener("click",showUsers)
+// 6
+const texto = document.getElementById("text") */
+//---------------------------------------------------
+
 
 //EVENT LISTENER
 startButton.addEventListener("click", startGame);
