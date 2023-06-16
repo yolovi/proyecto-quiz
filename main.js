@@ -29,10 +29,12 @@ function startGame() {
   startButton.classList.add("hide");
   currentQuestionIndex = 0;
   questionContainer.classList.remove("hide");
+
+  showQuestion();
 }
 
 //---------------------------------------------------
-//Solo para comprobar el dato que nos llega de la Api: 
+//Solo para comprobar el dato que nos llega de la Api:
 
 // axios
 //   .get("https://opentdb.com/api.php?amount=10")
@@ -40,81 +42,84 @@ function startGame() {
 //   .catch((err) => console.error(err));
 
 // metemos la info de la Api en una variable
-let apiData = []
+let apiData = [];
 
 axios
   .get("https://opentdb.com/api.php?amount=10")
   .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
 
-  setTimeout(() => {
-  console.log(apiData) 
-
-
+setTimeout(() => {
+  console.log(apiData);
 }, "1000");
-
-
 
 //---------------------------------
 //FIXME:   modificar para que me recoja la question de la API.
-//la estructura de question-answer es diferente del ejercicio de clase en la API 
+//la estructura de question-answer es diferente del ejercicio de clase en la API
 //(result es un array de objetos con cada question, map/forEach?)
 //En la API question y answers estan enb el mismo objeto pero la respuesta correcta y las incorrectas por separado
 // Quitar el SETTIMEOUT cuando reorganice el codigo y no lo necesite
 
-// lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera: 
+// lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera:
+
+function showAnswers() {
+  setTimeout(() => {
+    apiData.forEach((element) => {
+      let answers = [];
+      answers.push(element.correct_answer);
+
+      element.incorrect_answers.forEach((element) => {
+        answers.push(element);
+   
+      });
+
+      const button = document.createElement("button");
+      button.innerText = element.correct_answer;
+      answerContainer.appendChild(button);
+
+      const buttonI = document.createElement("button");
+      buttonI.innerText = element.incorrect_answers;
+      answerContainer.appendChild(buttonI);
 
 
-// question.answers.forEach((answer) => {
-//   const button = document.createElement("button");
-//   button.innerText = answer.text;
 
-// setTimeout(() => {
-//   apiData.forEach((element) =>{
-//     console.log(element.incorrect_answers)
-//   })
-//   // console.log("incorrect", apiData[1])
-// }, "1000")
+      console.log(answers);
 
-
-function showAnswers(){
-  
- setTimeout(() => {
-  apiData.forEach((element) => {
-    console.log("correct" , element.correct_answer)
-    const button = document.createElement("button");
-    button.innerText = element.correct_answer;
-    answerContainer.innerText = element.correct_answer;
-    answerContainer.appendChild(button);
-
- 
-     //TODO://FIXME: consigue recorrer las respuestas incorrectas para mostrarlas y depues crear un boton por cada una
-
-   })
-
-  apiData.forEach((element) =>{
-    console.log(element.incorrect_answers)})
-
-}, "1000");
-
+    });
+  }, "1000");
 }
- 
 
-showAnswers()
+// function showAnswers(){
+
+//   setTimeout(() => {
+//    apiData.forEach((element) => {
+//      console.log("correct" , element.correct_answer)
+//      const button = document.createElement("button");
+//      button.innerText = element.correct_answer;
+//      answerContainer.innerText = element.correct_answer;
+//      answerContainer.appendChild(button);
+
+//      console.log(element.incorrect_answers)
+//     })
+
+//  }, "1000");
+
+//  }
+
+
 
 //--------------------------------------------------
 
-function showQuestion(){
-   
-    setTimeout(() => {
-        apiData.forEach((element) => { 
-            questionElement.innerText = element.question
-        }) 
-    }, "1000");
+function showQuestion() {
+  setTimeout(() => {
+    apiData.forEach((element) => {
+      questionElement.innerText = element.question;
+    });
+  }, "1000");
 
-   }
-   
-   showQuestion()
+  showAnswers();
+}
+
 
 
 // ejemplo funcion quiz Sofia----------------
@@ -145,7 +150,6 @@ btn.addEventListener("click",showUsers)
 // 6
 const texto = document.getElementById("text") */
 //---------------------------------------------------
-
 
 //EVENT LISTENER
 startButton.addEventListener("click", startGame);
