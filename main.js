@@ -69,7 +69,16 @@ axios
 //   const button = document.createElement("button");
 //   button.innerText = answer.text;
 
+// setTimeout(() => {
+//   apiData.forEach((element) =>{
+//     console.log(element.incorrect_answers)
+//   })
+//   // console.log("incorrect", apiData[1])
+// }, "1000")
+
+
 function showAnswers(){
+  
  setTimeout(() => {
   apiData.forEach((element) => {
     console.log("correct" , element.correct_answer)
@@ -77,16 +86,14 @@ function showAnswers(){
     button.innerText = element.correct_answer;
     answerContainer.innerText = element.correct_answer;
     answerContainer.appendChild(button);
-    
-    //TODO://FIXME: consigue recorrer las respuestas incorrectas para mostrarlas y depues crear un boton por cada una
-    console.log("incorrect",element.incorrect_answer)
 
-  }) 
+ 
+     //TODO://FIXME: consigue recorrer las respuestas incorrectas para mostrarlas y depues crear un boton por cada una
 
-  // apiData.incorrect_answer.map((element) => {
-  //   console.log("incorrect",element)
-    
-  // })
+   })
+
+  apiData.forEach((element) =>{
+    console.log(element.incorrect_answers)})
 
 }, "1000");
 
