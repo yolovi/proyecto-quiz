@@ -1,0 +1,29 @@
+
+
+
+ "results": [ 
+      { 
+        "category": "Science & Nature",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Au on the Periodic Table refers to which element?",
+        "correct_answer": "Gold",
+        "incorrect_answers": [
+          "Silver",
+          "Oxygen",
+          "Nickel"
+        ]
+      },
+      {
+        "category": "Entertainment: Music",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "What is the name of French electronic music producer Madeon&#039;s 2015 debut studio album?",
+        "correct_answer": "Adventure",
+        "incorrect_answers": [
+          "The City",
+          "Icarus",
+          "Pop Culture"
+        ]
+      },
+ ]

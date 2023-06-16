@@ -17,7 +17,7 @@ const questionContainer = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
-const answerButtonsContainer = document.getElementById("answer-buttons");
+const answerContainer = document.getElementById("answer-container");
 
 //FUNCIONES
 
@@ -47,6 +47,14 @@ axios
   .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
 
+  setTimeout(() => {
+  console.log(apiData) 
+
+
+}, "1000");
+
+
+
 //---------------------------------
 //FIXME:   modificar para que me recoja la question de la API.
 //la estructura de question-answer es diferente del ejercicio de clase en la API 
@@ -56,13 +64,34 @@ axios
 
 // lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera: 
 
+
+// question.answers.forEach((answer) => {
+//   const button = document.createElement("button");
+//   button.innerText = answer.text;
+
 function showAnswers(){
  setTimeout(() => {
-    apiData.forEach((element) => { 
-        console.log(element.answer)
-    }) 
+  apiData.forEach((element) => {
+    console.log("correct" , element.correct_answer)
+    const button = document.createElement("button");
+    button.innerText = element.correct_answer;
+    answerContainer.innerText = element.correct_answer;
+    answerContainer.appendChild(button);
+    
+    //TODO://FIXME: consigue recorrer las respuestas incorrectas para mostrarlas y depues crear un boton por cada una
+    console.log("incorrect",element.incorrect_answer)
+
+  }) 
+
+  // apiData.incorrect_answer.map((element) => {
+  //   console.log("incorrect",element)
+    
+  // })
+
 }, "1000");
+
 }
+ 
 
 showAnswers()
 
@@ -79,6 +108,7 @@ function showQuestion(){
    }
    
    showQuestion()
+
 
 // ejemplo funcion quiz Sofia----------------
 /* function showQuestion(question) {
