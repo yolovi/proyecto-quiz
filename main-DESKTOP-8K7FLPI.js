@@ -62,92 +62,60 @@ setTimeout(() => {
 
 // lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera:
 
-let answers = [];
-
-
 function showAnswers() {
   setTimeout(() => {
     apiData.forEach((element) => {
-      
+      let answers = [];
       answers.push(element.correct_answer);
 
       element.incorrect_answers.forEach((element) => {
         answers.push(element);
+
       });
 
-      //CORRECT answers
       const button = document.createElement("button");
       button.innerText = element.correct_answer;
       answerContainer.appendChild(button);
+      console.log(element.correct_answer)
 
-      //FIXME:esto no se si funciona
-      button.dataset.correct = true;
-      // console.log(element.correct_answer)
-
-      //INCORRECT answers
       element.incorrect_answers.forEach((element) => {
-          
-      const buttonI = document.createElement("button");
-      buttonI.innerText = element;
-      answerContainer.appendChild(buttonI);
+        console.log(element)
 
-      // console.log(element)
+
+      //   const buttonI = document.createElement("button");
+      // buttonI.innerText = element.incorrect_answers;
+      // answerContainer.appendChild(buttonI);
 
       });
       
-    
-      
+
+     
+
+
+
+      console.log(answers);
+
     });
   }, "1000");
 }
 
+// function showAnswers(){
 
-console.log(answers);
-
-//Patri solucion
-// function showAnswers() {
 //   setTimeout(() => {
-//     apiData.forEach((element) => {
-//       //let answers = [];
-//       //answers.push(element.correct_answer);
+//    apiData.forEach((element) => {
+//      console.log("correct" , element.correct_answer)
+//      const button = document.createElement("button");
+//      button.innerText = element.correct_answer;
+//      answerContainer.innerText = element.correct_answer;
+//      answerContainer.appendChild(button);
 
-//       //element.incorrect_answers.forEach((element) => {
-//       //answers.push(element);
-//       //});
+//      console.log(element.incorrect_answers)
+//     })
 
-//       //correct_answer:
-//       const button = document.createElement("button");
-//       button.innerText = element.correct_answer;
-//       answerContainer.appendChild(button);
+//  }, "1000");
 
-//       //incorrect_answers:
-//       element.incorrect_answers.forEach((incorrect_answer) => {
-//         console.log(incorrect_answer);
+//  }
 
-//         const buttonI = document.createElement("button");
-//         buttonI.innerText = incorrect_answer;
-//         answerContainer.appendChild(buttonI);
-//         //answers.push(element);
-//       });
-//       //console.log(answers);
-//     });
-//   }, "1000");
-// }
-
-
-// function setNextQuestion() {
-//   showQuestion(questions[currentQuestionIndex]); 
-//   }
-
-
- //FIXME:esto no se si funciona, no lo pinta de verde
-
-function setStatusClass(element) {
-  if (element.dataset.correct) {
-  element.classList.add("correct");
-  } else {
-  element.classList.add("wrong");  
-  }}  
 
 
 //--------------------------------------------------

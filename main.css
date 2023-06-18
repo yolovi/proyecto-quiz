@@ -1,3 +1,7 @@
-.hide{
-    display: none; 
-    }
+.hide {
+    display: none;
+}
+
+.correct {
+    background-color: rgb(0, 255, 72);
+}
