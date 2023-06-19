@@ -5,3 +5,7 @@
 .correct {
     background-color: rgb(0, 255, 72);
 }
+
+.wrong {
+    background-color: rgb(255, 0, 0);
+}

@@ -23,15 +23,15 @@ const answerContainer = document.getElementById("answer-container");
 
 //Esta funcion esta conectada al boton start del quiz. Escondel el boton start al clicar y muestra el contenedor con la primera pregunta:
 
-let currentQuestionIndex;
+// let currentQuestionIndex;
 
-function startGame() {
-  startButton.classList.add("hide");
-  currentQuestionIndex = 0;
-  questionContainer.classList.remove("hide");
+// function startGame() {
+//   startButton.classList.add("hide");
+//   currentQuestionIndex = 0;
+//   questionContainer.classList.remove("hide");
 
-  showQuestion();
-}
+//   showQuestion();
+// }
 
 //---------------------------------------------------
 //Solo para comprobar el dato que nos llega de la Api:
@@ -42,7 +42,7 @@ function startGame() {
 //   .catch((err) => console.error(err));
 
 // metemos la info de la Api en una variable
-let apiData = [];
+
 
 axios
   .get("https://opentdb.com/api.php?amount=10")
@@ -62,139 +62,110 @@ setTimeout(() => {
 
 // lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera:
 
-let answers = [];
-
-
-function showAnswers() {
-  setTimeout(() => {
-    apiData.forEach((element) => {
-      
-      answers.push(element.correct_answer);
-
-      element.incorrect_answers.forEach((element) => {
-        answers.push(element);
-      });
-
-      //CORRECT answers
-      const button = document.createElement("button");
-      button.innerText = element.correct_answer;
-      answerContainer.appendChild(button);
-
-      //FIXME:esto no se si funciona
-      button.dataset.correct = true;
-      // console.log(element.correct_answer)
-
-      //INCORRECT answers
-      element.incorrect_answers.forEach((element) => {
-          
-      const buttonI = document.createElement("button");
-      buttonI.innerText = element;
-      answerContainer.appendChild(buttonI);
-
-      // console.log(element)
-
-      });
-      
+function getQuestions(){
+    apiData = apiData.map((elemento) => ({
+      question: elemento.question,
+      correctAnswer: elemento.correct_answer,
+      allAnswers: [...elemento.incorrect_answers, elemento.correct_answer]
     
-      
-    });
-  }, "1000");
-}
+    }))
+  
+    console.log(allAnswers)
+ 
+  }
 
 
-console.log(answers);
 
-//Patri solucion
+
+
+getQuestions()
+
+// function getQuestions() {
+//   axios
+//       .get("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple")
+//       .then((response) => {
+//            
+//           console.log("Las preguntas formateadas son:", quizz);
+//           startButton.addEventListener("click", () => {
+//               resetGame();
+//               startGame(quizz);
+//           });
+//       })
+//       .catch((err) => {
+//           console.error("Error", err);
+//       });
+// }
+// let answers = [];
+
+
 // function showAnswers() {
 //   setTimeout(() => {
 //     apiData.forEach((element) => {
-//       //let answers = [];
-//       //answers.push(element.correct_answer);
+      
+//       answers.push(element.correct_answer);
 
-//       //element.incorrect_answers.forEach((element) => {
-//       //answers.push(element);
-//       //});
+//       element.incorrect_answers.forEach((element) => {
+//         answers.push(element);
+//       });
 
-//       //correct_answer:
+//       //CORRECT answers
 //       const button = document.createElement("button");
 //       button.innerText = element.correct_answer;
 //       answerContainer.appendChild(button);
 
-//       //incorrect_answers:
-//       element.incorrect_answers.forEach((incorrect_answer) => {
-//         console.log(incorrect_answer);
+//       //FIXME:esto no se si funciona
+//       button.dataset.correct = true;
+//       // console.log(element.correct_answer)
 
-//         const buttonI = document.createElement("button");
-//         buttonI.innerText = incorrect_answer;
-//         answerContainer.appendChild(buttonI);
-//         //answers.push(element);
+//       //INCORRECT answers
+//       element.incorrect_answers.forEach((element) => {
+          
+//       const buttonI = document.createElement("button");
+//       buttonI.innerText = element;
+//       answerContainer.appendChild(buttonI);
+
+//       // console.log(element)
+
 //       });
-//       //console.log(answers);
+      
+    
+      
 //     });
 //   }, "1000");
 // }
 
 
-// function setNextQuestion() {
-//   showQuestion(questions[currentQuestionIndex]); 
-//   }
+// console.log(answers);
+
 
 
  //FIXME:esto no se si funciona, no lo pinta de verde
 
-function setStatusClass(element) {
-  if (element.dataset.correct) {
-  element.classList.add("correct");
-  } else {
-  element.classList.add("wrong");  
-  }}  
+// function setStatusClass(element) {
+//   if (element.dataset.correct) {
+//   element.classList.add("correct");
+//   } else {
+//   element.classList.add("wrong");  
+//   }}  
 
 
 //--------------------------------------------------
 
-function showQuestion() {
-  setTimeout(() => {
-    apiData.forEach((element) => {
-      questionElement.innerText = element.question;
-    });
-  }, "1000");
+// function showQuestion() {
+//   setTimeout(() => {
+//     apiData.forEach((element) => {
+//       questionElement.innerText = element.question;
+//     });
+//   }, "1000");
 
-  showAnswers();
-}
+//   showAnswers();
+// }
 
 
 
-// ejemplo funcion quiz Sofia----------------
-/* function showQuestion(question) {
-  questionElement.innerText = question.question;
-  question.answers.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    if (answer.correct) {
-      button.dataset.correct = true;
-    }
-    answerButtonsElement.appendChild(button);
-  });
-} */
-//--------------------------------------
-
-// ------funcion ejercicio asincronia --- Juanda-----
-/* const showUsers = () => {
-  console.log(users)
-  users.forEach(user => {
-    console.log(user)
-    texto.innerHTML += `<p> ${user.name} </p>`
-  })
-}
-// 5
-const btn = document.getElementById("btn")
-btn.addEventListener("click",showUsers)
-// 6
-const texto = document.getElementById("text") */
-//---------------------------------------------------
 
 //EVENT LISTENER
-startButton.addEventListener("click", startGame);
+// startButton.addEventListener("click", startGame);
 
 //TODO: BORRAR AL TERMINAR
 
