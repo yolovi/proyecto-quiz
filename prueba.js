@@ -26,15 +26,17 @@ let apiDataNew = [];
 
 // peticion datos API
 axios
-.get("https://opentdb.com/api.php?amount=10")
-.then((res) => (apiData = res.data.results))
-.catch((err) => console.error(err));
+  .get("https://opentdb.com/api.php?amount=10")
+  .then((res) => (apiData = res.data.results))
+  .catch((err) => console.error(err));
 
 setTimeout(() => {
-    console.log(apiData);
+  console.log(apiData);
 }, "1000");
 
 //FUNCIONES
+
+//TODO: add sort and math random a los botones para que no salga siempre la true en la misma posicion   
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 
@@ -63,21 +65,30 @@ getQuestions();
 
 // let currentQuestionIndex;
 
-function startGame() {
-  startButton.classList.add("hide");
-  currentQuestionIndex = 0;
-  questionContainer.classList.remove("hide");
 
-  setNextQuestion();
-}
+function setStatusClass(btn) {
+    if (btn.dataset.correct) {
+      btn.classList.add("correct");
+    } else {
+      btn.classList.add("wrong");
+    }
+  }
+  
+
+function selectAnswer() {
+    Array.from(answerContainer.children).forEach((button) => {
+      setStatusClass(button);
+    });
+  
+    if (apiDataNew.length > currentQuestionIndex + 1) {
+      nextButton.classList.remove("hide");
+    } else {
+      startButton.innerText = "Restart";
+      startButton.classList.remove("hide");
+    }
+  }
 
 function showQuestion(currentQuestion) {
-
-  
-    // apiDataNew.forEach((element) => {
-    //     questionElement.innerText = element.question;
-    // });
-
   questionElement.innerText = currentQuestion.question;
   currentQuestion.allAnswers.forEach((answer) => {
     const button = document.createElement("button");
@@ -85,14 +96,40 @@ function showQuestion(currentQuestion) {
     if (answer.correct) {
       button.dataset.correct = true;
     }
+
+    button.addEventListener("click", selectAnswer);
     answerContainer.appendChild(button);
   });
 }
 
 
+
+
+
+function resetState() {
+  nextButton.classList.add("hide");
+  while (answerContainer.firstChild) {
+    answerContainer.removeChild(answerContainer.firstChild);
+  }
+}
+
 function setNextQuestion() {
-    showQuestion(apiDataNew[currentQuestionIndex]);
-    }
+    resetState()
+  showQuestion(apiDataNew[currentQuestionIndex]);
+}
+
+function startGame() {
+    startButton.classList.add("hide");
+    currentQuestionIndex = 0;
+    questionContainer.classList.remove("hide");
+  
+    setNextQuestion();
+  }
+  
 
 //EVENT LISTENER
 startButton.addEventListener("click", startGame);
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++;
+  setNextQuestion();
+});
