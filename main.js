@@ -36,12 +36,11 @@ setTimeout(() => {
 
 //FUNCIONES
 
-//TODO: add sort and math random a los botones para que no salga siempre la true en la misma posicion   
 //TODO: add decodeURI para los simbolos raros de las preguntas
-//TODO: add marcador socore
+//TODO: add marcador score
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
-
+// added sort math random en allAnswers para que salgan desordenadas
 function getQuestions() {
   setTimeout(() => {
     apiDataNew = apiData.map((elemento) => {
@@ -54,7 +53,9 @@ function getQuestions() {
       });
       return {
         question: elemento.question,
-        allAnswers: [...incorrectAnswers, correctAnswer],
+        allAnswers: [...incorrectAnswers, correctAnswer].sort(function(){ //Array elements now scrambled
+              return 0.5 - Math.random()
+          }),
       };
     });
     console.log("apiDataNew", apiDataNew);
