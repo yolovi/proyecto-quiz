@@ -19,31 +19,12 @@ const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const answerContainer = document.getElementById("answer-container");
 
-//FUNCIONES
+// Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
-//Esta funcion esta conectada al boton start del quiz. Escondel el boton start al clicar y muestra el contenedor con la primera pregunta:
+let apiData = [];
+let apiDataNew = [];
 
-// let currentQuestionIndex;
-
-// function startGame() {
-//   startButton.classList.add("hide");
-//   currentQuestionIndex = 0;
-//   questionContainer.classList.remove("hide");
-
-//   showQuestion();
-// }
-
-//---------------------------------------------------
-//Solo para comprobar el dato que nos llega de la Api:
-
-// axios
-//   .get("https://opentdb.com/api.php?amount=10")
-//   .then((res) => console.log(res.data.results))
-//   .catch((err) => console.error(err));
-
-// metemos la info de la Api en una variable
-
-
+// peticion datos API
 axios
   .get("https://opentdb.com/api.php?amount=10")
   .then((res) => (apiData = res.data.results))
@@ -53,173 +34,110 @@ setTimeout(() => {
   console.log(apiData);
 }, "1000");
 
-//---------------------------------
-//FIXME:   modificar para que me recoja la question de la API.
-//la estructura de question-answer es diferente del ejercicio de clase en la API
-//(result es un array de objetos con cada question, map/forEach?)
-//En la API question y answers estan enb el mismo objeto pero la respuesta correcta y las incorrectas por separado
-// Quitar el SETTIMEOUT cuando reorganice el codigo y no lo necesite
+//FUNCIONES
 
-// lo siguientes es codigo para probar a traerme las respuestas pero la estructura es diferente. Pensar una manera de como mostrarlas en el DOM y despues anadirlo a la funcion ShowQuestions o enlazarlo al boton start, por lo menos la primera:
+//TODO: add sort and math random a los botones para que no salga siempre la true en la misma posicion   
+//TODO: add decodeURI para los simbolos raros de las preguntas
+//TODO: add marcador socore
 
-function getQuestions(){
-    apiData = apiData.map((elemento) => ({
-      question: elemento.question,
-      correctAnswer: elemento.correct_answer,
-      allAnswers: [...elemento.incorrect_answers, elemento.correct_answer]
-    
-    }))
+// NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
+
+function getQuestions() {
+  setTimeout(() => {
+    apiDataNew = apiData.map((elemento) => {
+      let correctAnswer = { text: elemento.correct_answer, correct: true };
+      let incorrectAnswers = elemento.incorrect_answers.map((incorrect) => {
+        return {
+          text: incorrect,
+          correct: false,
+        };
+      });
+      return {
+        question: elemento.question,
+        allAnswers: [...incorrectAnswers, correctAnswer],
+      };
+    });
+    console.log("apiDataNew", apiDataNew);
+  }, 1000);
+}
+
+getQuestions();
+
+
+
+// var myarray=[25, 8, "George", "John"] 
+// myarray.sort(function(){ //Array elements now scrambled
+//     return 0.5 - Math.random()
+// })
+
+
+function setStatusClass(btn) {
+    if (btn.dataset.correct) {
+      btn.classList.add("correct");
+    } else {
+      btn.classList.add("wrong");
+    }
+  }
   
-    console.log(allAnswers)
- 
+
+function selectAnswer() {
+    Array.from(answerContainer.children).forEach((button) => {
+      setStatusClass(button);
+    });
+  
+    if (apiDataNew.length > currentQuestionIndex + 1) {
+      nextButton.classList.remove("hide");
+    } else {
+      startButton.innerText = "Restart";
+      startButton.classList.remove("hide");
+    }
+    console.log(currentQuestionIndex)
   }
 
+function showQuestion(currentQuestion) {
+  questionElement.innerText = currentQuestion.question;
+  currentQuestion.allAnswers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.innerText = answer.text;
+    if (answer.correct) {
+      button.dataset.correct = true;
+    }
+
+    button.addEventListener("click", selectAnswer);
+    answerContainer.appendChild(button);
+  });
+}
+
+// elimina las respuestas del contenedor para pintar las siguientes.
+function resetState() {
+  nextButton.classList.add("hide");
+  while (answerContainer.firstChild) {
+    answerContainer.removeChild(answerContainer.firstChild);
+  }
+}
+
+function setNextQuestion() {
+    resetState()
+  showQuestion(apiDataNew[currentQuestionIndex]);
+}
+
+//Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
+
+let currentQuestionIndex;
 
 
-
-
-getQuestions()
-
-// function getQuestions() {
-//   axios
-//       .get("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple")
-//       .then((response) => {
-//            
-//           console.log("Las preguntas formateadas son:", quizz);
-//           startButton.addEventListener("click", () => {
-//               resetGame();
-//               startGame(quizz);
-//           });
-//       })
-//       .catch((err) => {
-//           console.error("Error", err);
-//       });
-// }
-// let answers = [];
-
-
-// function showAnswers() {
-//   setTimeout(() => {
-//     apiData.forEach((element) => {
-      
-//       answers.push(element.correct_answer);
-
-//       element.incorrect_answers.forEach((element) => {
-//         answers.push(element);
-//       });
-
-//       //CORRECT answers
-//       const button = document.createElement("button");
-//       button.innerText = element.correct_answer;
-//       answerContainer.appendChild(button);
-
-//       //FIXME:esto no se si funciona
-//       button.dataset.correct = true;
-//       // console.log(element.correct_answer)
-
-//       //INCORRECT answers
-//       element.incorrect_answers.forEach((element) => {
-          
-//       const buttonI = document.createElement("button");
-//       buttonI.innerText = element;
-//       answerContainer.appendChild(buttonI);
-
-//       // console.log(element)
-
-//       });
-      
-    
-      
-//     });
-//   }, "1000");
-// }
-
-
-// console.log(answers);
-
-
-
- //FIXME:esto no se si funciona, no lo pinta de verde
-
-// function setStatusClass(element) {
-//   if (element.dataset.correct) {
-//   element.classList.add("correct");
-//   } else {
-//   element.classList.add("wrong");  
-//   }}  
-
-
-//--------------------------------------------------
-
-// function showQuestion() {
-//   setTimeout(() => {
-//     apiData.forEach((element) => {
-//       questionElement.innerText = element.question;
-//     });
-//   }, "1000");
-
-//   showAnswers();
-// }
-
-
-
+function startGame() {
+    startButton.classList.add("hide");
+    currentQuestionIndex = 0;
+    questionContainer.classList.remove("hide");
+  
+    setNextQuestion();
+  }
+  
 
 //EVENT LISTENER
-// startButton.addEventListener("click", startGame);
-
-//TODO: BORRAR AL TERMINAR
-
-//EJEMPLO ESTRUCTURA QUESTIONS JS con 2 preguntas:
-/* const questions = [
-  {
-    question: "What is 2 + 2?",
-    answers: [
-      { text: "4", correct: true },
-      { text: "22", correct: false },
-    ],
-  },
-  {
-    question: "Is web development fun?",
-    answers: [
-      { text: "Kinda", correct: false },
-      { text: "YES!!!", correct: true },
-      { text: "Um no", correct: false },
-      { text: "IDK", correct: false },
-    ],
-  },
-]; */
-
-// vs ESTRUCTURA API:
-/* const api = {
-    "response_code": 0,
-    //desde aqui es un array con objetos:
-    
-    "results": [ 
-      { 
-        "category": "Science & Nature",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Au on the Periodic Table refers to which element?",
-        "correct_answer": "Gold",
-        "incorrect_answers": [
-          "Silver",
-          "Oxygen",
-          "Nickel"
-        ]
-      },
-      {
-        "category": "Entertainment: Music",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "What is the name of French electronic music producer Madeon&#039;s 2015 debut studio album?",
-        "correct_answer": "Adventure",
-        "incorrect_answers": [
-          "The City",
-          "Icarus",
-          "Pop Culture"
-        ]
-      },
-    ]
-  }
-
-  console.log(typeof api) */
+startButton.addEventListener("click", startGame);
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++;
+  setNextQuestion();
+});
