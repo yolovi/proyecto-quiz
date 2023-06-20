@@ -19,6 +19,7 @@ const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const answerContainer = document.getElementById("answer-container");
 const answerButtons = document.getElementById("answer-container")
+const questionNumber = document.getElementById("question-number")
 
 
 
@@ -112,7 +113,9 @@ function selectAnswer() {
 }
 
 function showQuestion(currentQuestion) {
-  questionElement.innerText = currentQuestion.question;
+  questionElement.innerText = `${currentQuestionIndex +1}. ${currentQuestion.question}`;
+  console.log(questionNumber)
+  console.log(currentQuestionIndex)
   currentQuestion.allAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
