@@ -18,11 +18,16 @@ const questionElement = document.getElementById("question");
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const answerContainer = document.getElementById("answer-container");
+const answerButtons = document.getElementById("answer-container")
+
+
 
 // Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
 let apiData = [];
 let apiDataNew = [];
+let currentQuestionIndex;
+let score = 0;
 
 // peticion datos API
 axios
@@ -41,6 +46,7 @@ setTimeout(() => {
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 // added sort math random en allAnswers para que salgan desordenadas
+
 function getQuestions() {
   setTimeout(() => {
     apiDataNew = apiData.map((elemento) => {
@@ -53,9 +59,10 @@ function getQuestions() {
       });
       return {
         question: elemento.question,
-        allAnswers: [...incorrectAnswers, correctAnswer].sort(function(){ //Array elements now scrambled
-              return 0.5 - Math.random()
-          }),
+        allAnswers: [...incorrectAnswers, correctAnswer].sort(function () {
+          //Array elements now scrambled
+          return 0.5 - Math.random();
+        }),
       };
     });
     console.log("apiDataNew", apiDataNew);
@@ -64,36 +71,45 @@ function getQuestions() {
 
 getQuestions();
 
-
-
-// var myarray=[25, 8, "George", "John"] 
+//Ejemplo como desordenar array de manera aleatoria:
+// var myarray=[25, 8, "George", "John"]
 // myarray.sort(function(){ //Array elements now scrambled
 //     return 0.5 - Math.random()
 // })
 
-
-function setStatusClass(btn) {
-    if (btn.dataset.correct) {
-      btn.classList.add("correct");
-    } else {
-      btn.classList.add("wrong");
-    }
+function setStatusClass(button) {
+  if (button.dataset.correct) {
+    button.classList.add("correct");
+  } else {
+    button.classList.add("wrong");
   }
-  
+  button.disabled = true //esto desabilita todos los botones al seleccionar uno
+}
+
+// score funcion prueba
+
+// function scoreUser( ) {
+//   if(answer === true) {
+//   score ++
+//   return true
+//}
+//    return false
+// }
 
 function selectAnswer() {
-    Array.from(answerContainer.children).forEach((button) => {
-      setStatusClass(button);
-    });
-  
-    if (apiDataNew.length > currentQuestionIndex + 1) {
-      nextButton.classList.remove("hide");
-    } else {
-      startButton.innerText = "Restart";
-      startButton.classList.remove("hide");
-    }
-    console.log(currentQuestionIndex)
+  Array.from(answerContainer.children).forEach((button) => {
+    setStatusClass(button);
+  });
+
+ 
+  if (apiDataNew.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove("hide");
+  } else {
+    startButton.innerText = "Restart";
+    startButton.classList.remove("hide");
   }
+  // console.log(currentQuestionIndex)
+}
 
 function showQuestion(currentQuestion) {
   questionElement.innerText = currentQuestion.question;
@@ -104,10 +120,19 @@ function showQuestion(currentQuestion) {
       button.dataset.correct = true;
     }
 
-    button.addEventListener("click", selectAnswer);
+    button.addEventListener("click", () => {
+      if (button.dataset.correct === "true") {
+        score++;
+        console.log(score);
+      }
+      selectAnswer();
+    });
     answerContainer.appendChild(button);
+
   });
 }
+
+console.log(score);
 
 // elimina las respuestas del contenedor para pintar las siguientes.
 function resetState() {
@@ -118,23 +143,19 @@ function resetState() {
 }
 
 function setNextQuestion() {
-    resetState()
+  resetState();
   showQuestion(apiDataNew[currentQuestionIndex]);
 }
 
 //Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
 
-let currentQuestionIndex;
-
-
 function startGame() {
-    startButton.classList.add("hide");
-    currentQuestionIndex = 0;
-    questionContainer.classList.remove("hide");
-  
-    setNextQuestion();
-  }
-  
+  startButton.classList.add("hide");
+  currentQuestionIndex = 0;
+  questionContainer.classList.remove("hide");
+
+  setNextQuestion();
+}
 
 //EVENT LISTENER
 startButton.addEventListener("click", startGame);
