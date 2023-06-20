@@ -20,6 +20,7 @@ const nextButton = document.getElementById("next-btn");
 const answerContainer = document.getElementById("answer-container");
 const answerButtons = document.getElementById("answer-container")
 const questionNumber = document.getElementById("question-number")
+const scoreButton = document.getElementById("score-btn")
 
 
 
@@ -79,6 +80,13 @@ getQuestions();
 //     return 0.5 - Math.random()
 // })
 
+
+function showScore(){
+  scoreButton.innerText = `Your score is ${score}`
+ 
+}
+
+
 function setStatusClass(button) {
   if (button.dataset.correct) {
     button.classList.add("correct");
@@ -114,8 +122,8 @@ function selectAnswer() {
 
 function showQuestion(currentQuestion) {
   questionElement.innerText = `${currentQuestionIndex +1}. ${currentQuestion.question}`;
-  console.log(questionNumber)
-  console.log(currentQuestionIndex)
+  // console.log(questionNumber)
+  // console.log(currentQuestionIndex)
   currentQuestion.allAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
@@ -166,3 +174,4 @@ nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   setNextQuestion();
 });
+scoreButton.addEventListener("click", showScore )
