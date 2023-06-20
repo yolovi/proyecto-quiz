@@ -24,7 +24,7 @@ const questionNumber = document.getElementById("question-number");
 //div Score PAge
 const scorePage = document.getElementById("score-page");
 const scoreText = document.getElementById("score-text");
-const restartBtn = document.getElementById("restart-btn")
+const restartBtn = document.getElementById("restart-btn");
 
 // Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
@@ -47,10 +47,7 @@ setTimeout(() => {
 
 //TODO: add decodeURI para los simbolos raros de las preguntas
 //TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
-//TODO: poner el boton de "restart" en el div de score. Y que cuando se seleccione la ultima pregunta te lleve automaticamente al div-pag score o tambien se podria poner un boton "ver mis resultados" que haga lo mismo (llevarte al div score y ponerte el boton restart)
-//FIXME: poner el contador a 0 cuando vuelve a comenzar la partida. 
 //TODO: Guardar en el Local Storage cada puntuacion
-
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 // added sort math random en allAnswers para que salgan desordenadas
@@ -113,9 +110,7 @@ function selectAnswer() {
   if (apiDataNew.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
-    // startButton.innerText = "Restart";
     scorePageBtn.classList.remove("hide");
-    // startButton.classList.remove("hide");
   }
   // console.log(currentQuestionIndex)
 }
@@ -132,7 +127,6 @@ function showQuestion(currentQuestion) {
     if (answer.correct) {
       button.dataset.correct = true;
     }
-
     button.addEventListener("click", () => {
       if (button.dataset.correct === "true") {
         score++;
@@ -160,21 +154,18 @@ function setNextQuestion() {
 }
 
 //Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
-
 function startGame() {
   startButton.classList.add("hide");
   currentQuestionIndex = 0;
   questionContainer.classList.remove("hide");
-
+  score = 0;
   setNextQuestion();
 }
 
 function restart() {
-  // restartBtn.innerText = "Restart";
-  homePage.classList.remove("hide")
-  scorePage.classList.add("hide")
+  homePage.classList.remove("hide");
+  scorePage.classList.add("hide");
 }
-
 
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
@@ -182,8 +173,9 @@ btnTakeQuiz.addEventListener("click", () => {
   scorePageBtn.classList.add("hide");
   startButton.classList.remove("hide");
   questionPage.classList.remove("hide");
-  questionContainer.classList.add("hide")
+  questionContainer.classList.add("hide");
 });
+
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   questionElement.classList.remove("hide");
@@ -197,5 +189,6 @@ scorePageBtn.addEventListener("click", () => {
   scorePage.classList.remove("hide");
   scoreText.innerText = `Your score is ${score}`;
 });
-restartBtn.addEventListener("click", restart );
+
+restartBtn.addEventListener("click", restart);
 // scoreButton.addEventListener("click", showScore )
