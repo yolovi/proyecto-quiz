@@ -42,7 +42,8 @@ setTimeout(() => {
 //FUNCIONES
 
 //TODO: add decodeURI para los simbolos raros de las preguntas
-//TODO: add marcador score
+//TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
+//TODO: poner el boton de "restart" en el div de score. Y que cuando se seleccione la ultima pregunta te lleve automaticamente al div-pag score o tambien se podria poner un boton "ver mis resultados" que haga lo mismo (llevarte al div score y ponerte el boton restart)
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 // added sort math random en allAnswers para que salgan desordenadas
@@ -86,14 +87,13 @@ function setStatusClass(button) {
   button.disabled = true //esto desabilita todos los botones al seleccionar uno
 }
 
-// score funcion prueba
+//FIXME: score funcion prueba. quitar la funcion que tengo dentro del event listener dentro del showQuestion para llamar la funcion  score dentro del event listener 
 
-// function scoreUser( ) {
-//   if(answer === true) {
-//   score ++
-//   return true
-//}
-//    return false
+// function scoreUser() {
+//  if (button.dataset.correct === "true") {
+//   score++;
+//   console.log(score);
+// }
 // }
 
 function selectAnswer() {
