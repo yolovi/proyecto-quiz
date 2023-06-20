@@ -17,14 +17,14 @@ const questionContainer = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
+const scorePageBtn = document.getElementById("score-page-btn");
 const answerContainer = document.getElementById("answer-container");
-const answerButtons = document.getElementById("answer-container")
-const questionNumber = document.getElementById("question-number")
+const answerButtons = document.getElementById("answer-container");
+const questionNumber = document.getElementById("question-number");
 //div Score PAge
-const scorePage = document.getElementById("score-page")
-const scoreButton = document.getElementById("score-btn")
-
-
+const scorePage = document.getElementById("score-page");
+const scoreText = document.getElementById("score-text");
+const restartBtn = document.getElementById("restart-btn")
 
 // Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
@@ -48,6 +48,9 @@ setTimeout(() => {
 //TODO: add decodeURI para los simbolos raros de las preguntas
 //TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
 //TODO: poner el boton de "restart" en el div de score. Y que cuando se seleccione la ultima pregunta te lleve automaticamente al div-pag score o tambien se podria poner un boton "ver mis resultados" que haga lo mismo (llevarte al div score y ponerte el boton restart)
+//FIXME: poner el contador a 0 cuando vuelve a comenzar la partida. 
+//TODO: Guardar en el Local Storage cada puntuacion
+
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 // added sort math random en allAnswers para que salgan desordenadas
@@ -82,22 +85,16 @@ getQuestions();
 //     return 0.5 - Math.random()
 // })
 
-
-function showScore(){
-  scoreButton.innerText = `Your score is ${score}` 
-}
-
-
 function setStatusClass(button) {
   if (button.dataset.correct) {
     button.classList.add("correct");
   } else {
     button.classList.add("wrong");
   }
-  button.disabled = true //esto desabilita todos los botones al seleccionar uno
+  button.disabled = true; //esto desabilita todos los botones al seleccionar uno
 }
 
-//FIXME: score funcion prueba. quitar la funcion que tengo dentro del event listener dentro del showQuestion para llamar la funcion  score dentro del event listener 
+//FIXME: score funcion prueba. quitar la funcion que tengo dentro del event listener dentro del showQuestion para llamar la funcion  score dentro del event listener
 
 // function scoreUser() {
 //  if (button.dataset.correct === "true") {
@@ -106,23 +103,27 @@ function setStatusClass(button) {
 // }
 // }
 
+//FIXME: cambiar starButton.innerText= "Restart" y poner "show Your Score" que te dirija  a la pagina Score y ahi poner el boton restar/play again
+
 function selectAnswer() {
   Array.from(answerContainer.children).forEach((button) => {
     setStatusClass(button);
   });
 
- 
   if (apiDataNew.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
-    startButton.innerText = "Restart";
-    startButton.classList.remove("hide");
+    // startButton.innerText = "Restart";
+    scorePageBtn.classList.remove("hide");
+    // startButton.classList.remove("hide");
   }
   // console.log(currentQuestionIndex)
 }
 
 function showQuestion(currentQuestion) {
-  questionElement.innerText = `${currentQuestionIndex +1}. ${currentQuestion.question}`;
+  questionElement.innerText = `${currentQuestionIndex + 1}. ${
+    currentQuestion.question
+  }`;
   // console.log(questionNumber)
   // console.log(currentQuestionIndex)
   currentQuestion.allAnswers.forEach((answer) => {
@@ -140,7 +141,6 @@ function showQuestion(currentQuestion) {
       selectAnswer();
     });
     answerContainer.appendChild(button);
-
   });
 }
 
@@ -169,15 +169,31 @@ function startGame() {
   setNextQuestion();
 }
 
+function restart() {
+  // restartBtn.innerText = "Restart";
+  homePage.classList.remove("hide")
+  scorePage.classList.add("hide")
+}
+
+
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
   homePage.classList.add("hide");
-  scorePage.classList.add("hide")
+  startButton.classList.remove("hide");
+  scorePageBtn.classList.add("hide");
   questionPage.classList.remove("hide");
-})
+});
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   setNextQuestion();
 });
-scoreButton.addEventListener("click", showScore )
+
+scorePageBtn.addEventListener("click", () => {
+  // homePage.classList.add("hide");
+  questionPage.classList.add("hide");
+  scorePage.classList.remove("hide");
+  scoreText.innerText = `Your score is ${score}`;
+});
+restartBtn.addEventListener("click", restart );
+// scoreButton.addEventListener("click", showScore )
