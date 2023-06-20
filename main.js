@@ -179,12 +179,14 @@ function restart() {
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
   homePage.classList.add("hide");
-  startButton.classList.remove("hide");
   scorePageBtn.classList.add("hide");
+  startButton.classList.remove("hide");
   questionPage.classList.remove("hide");
+  questionContainer.classList.add("hide")
 });
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
+  questionElement.classList.remove("hide");
   currentQuestionIndex++;
   setNextQuestion();
 });
