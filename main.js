@@ -20,6 +20,8 @@ const nextButton = document.getElementById("next-btn");
 const answerContainer = document.getElementById("answer-container");
 const answerButtons = document.getElementById("answer-container")
 const questionNumber = document.getElementById("question-number")
+//div Score PAge
+const scorePage = document.getElementById("score-page")
 const scoreButton = document.getElementById("score-btn")
 
 
@@ -82,8 +84,7 @@ getQuestions();
 
 
 function showScore(){
-  scoreButton.innerText = `Your score is ${score}`
- 
+  scoreButton.innerText = `Your score is ${score}` 
 }
 
 
@@ -169,6 +170,11 @@ function startGame() {
 }
 
 //EVENT LISTENER
+btnTakeQuiz.addEventListener("click", () => {
+  homePage.classList.add("hide");
+  scorePage.classList.add("hide")
+  questionPage.classList.remove("hide");
+})
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
