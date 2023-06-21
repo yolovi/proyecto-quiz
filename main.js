@@ -45,9 +45,13 @@ setTimeout(() => {
 
 //FUNCIONES
 
+//TODO: aync await 
+//TODO: funciones flecha
 //TODO: add decodeURI para los simbolos raros de las preguntas
 //TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
-//TODO: Guardar en el Local Storage cada puntuacion
+//TODO: funcion hide views (opcional). ver diapos clase users-login
+//TODO: EXTRA. Guardar en el Local Storage cada puntuacion
+//TODO: EXTRA. navbar
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
 // added sort math random en allAnswers para que salgan desordenadas
@@ -166,6 +170,21 @@ function restart() {
   homePage.classList.remove("hide");
   scorePage.classList.add("hide");
 }
+
+
+//FIXME: revisar este codigo para depurar los signos que aparecen en las preguntas y respuestas
+// function decodeHTML(html) {
+//   let txt = document.createElement("textarea");
+//   txt.innerHTML = html;
+//   return txt.value;
+// }
+// function mostrarPregunta() {
+//   const preguntaActual = preguntas[preguntaIndex];
+//   const decodedQuestion = decodeHTML(preguntaActual.question);
+//   questionElement.innerText = decodedQuestion;
+//   answerButtonsElement.innerHTML = "";
+
+
 
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
