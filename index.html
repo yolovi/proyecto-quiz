@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <title>Quiz</title>
+    <link rel="stylesheet" href="css/main.css">    <title>Quiz</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 </head>
 
 <body>
-
 
     <!-- <nav>
         <span id="homeNav">home</span>
@@ -18,60 +18,54 @@
     <div id="home">
         <h1>Home Page</h1>
     </div>
-    <div id="about" class="hide">
+    <div id="about" class="d-none">
         <h1>About page</h1>
     </div> -->
 
-
+<!-- TODO: GIF con lo que hace el quiz README -->
     <header>
         <h1>QUIZ</h1>
     </header>
 
     <hr>
 
-    <div class="container" id="home-page">
-        <h3>Pagina Home</h3> FIXME: eliminar esta linea h3 <br>
+    <div class="container d-flex flex-column bd-highlight mb-3  align-items-center" id="home-page">
 
-        <h2 id="home">TAKE THE QUIZ</h2>
+
+        <h2 id="home" class="mt-5"> QUIZ TIME</h2>
         <!-- FIXME: enlazar imagen: -->
-        <img src="" alt="">
-        <button id="take-quiz">Take the Quiz</button>
+        <img  src="assets/grunge-question-mark-10 .png" class="img-inicio mt-3" alt="Question quote Responsive image">
+        <button id="take-quiz" class="mt-5">Take the Quiz</button>
 
     </div>
 
-    <hr>
+    <div id="question-page" class="d-none">
 
-    <div id="question-page" class="hide">
-        <h3>Pagina Preguntas</h3> FIXME: eliminar esta linea h3 <br><br>
-
-        <div id="question-container" class="hide">
+        <div id="question-container" class="d-none">
             <div id="question-title">Question:</div>
             <div id="question-number"></div>
             <div id="question"></div>
             <div id="answer-container"></div>
         </div>
 
-        <hr>
-
         <div class="controls">
             <button id="start-btn">Start</button>
-            <button id="next-btn" class="hide">Next</button>
-            <button id="score-page-btn" class="hide">Your Score</button>
+            <button id="next-btn" class="d-none">Next</button>
+            <button id="score-page-btn" class="d-none">Your Score</button>
         </div>
-
    
     </div>
 
-    <hr>
-
-    <div id="score-page" class="hide">
+    <div id="score-page" class="d-none">
         <h3>Pagina Score</h3>
         <span id="score-text"></span>
-        <button id="restart-btn">Play Again</button>
+        <button id="restart-btn">Go Home</button>
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
 </body>
 
 </html>

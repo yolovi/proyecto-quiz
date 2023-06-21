@@ -49,7 +49,7 @@ setTimeout(() => {
 //TODO: funciones flecha
 //TODO: add decodeURI para los simbolos raros de las preguntas
 //TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
-//TODO: funcion hide views (opcional). ver diapos clase users-login
+//TODO: funcion d-none views (opcional). ver diapos clase users-login
 //TODO: EXTRA. Guardar en el Local Storage cada puntuacion
 //TODO: EXTRA. navbar
 
@@ -112,19 +112,39 @@ function selectAnswer() {
   });
 
   if (apiDataNew.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove("hide");
+    nextButton.classList.remove("d-none");
   } else {
-    scorePageBtn.classList.remove("hide");
+    scorePageBtn.classList.remove("d-none");
   }
   // console.log(currentQuestionIndex)
 }
 
+// function showQuestion(currentQuestion) {
+//   questionElement.innerText = `${currentQuestionIndex + 1}. ${
+//     currentQuestion.question
+//   }`;
+//   // console.log(questionNumber)
+//   // console.log(currentQuestionIndex)
+//   currentQuestion.allAnswers.forEach((answer) => {
+//     const button = document.createElement("button");
+//     button.innerText = answer.text;
+//     if (answer.correct) {
+//       button.dataset.correct = true;
+//     }
+//     button.addEventListener("click", () => {
+//       if (button.dataset.correct === "true") {
+//         score++;
+//         console.log(score);
+//       }
+//       selectAnswer();
+//     });
+//     answerContainer.appendChild(button);
+//   });
+// }
+
 function showQuestion(currentQuestion) {
-  questionElement.innerText = `${currentQuestionIndex + 1}. ${
-    currentQuestion.question
-  }`;
-  // console.log(questionNumber)
-  // console.log(currentQuestionIndex)
+  const decodedQuestion = decodeHTML(currentQuestion.question); // Decodificar la pregunta
+  questionElement.innerText = `${currentQuestionIndex + 1}. ${decodedQuestion}`;
   currentQuestion.allAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
@@ -146,7 +166,7 @@ console.log(score);
 
 // elimina las respuestas del contenedor para pintar las siguientes.
 function resetState() {
-  nextButton.classList.add("hide");
+  nextButton.classList.add("d-none");
   while (answerContainer.firstChild) {
     answerContainer.removeChild(answerContainer.firstChild);
   }
@@ -159,53 +179,51 @@ function setNextQuestion() {
 
 //Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
 function startGame() {
-  startButton.classList.add("hide");
+  startButton.classList.add("d-none");
   currentQuestionIndex = 0;
-  questionContainer.classList.remove("hide");
+  questionContainer.classList.remove("d-none");
   score = 0;
   setNextQuestion();
 }
 
 function restart() {
-  homePage.classList.remove("hide");
-  scorePage.classList.add("hide");
+  homePage.classList.remove("d-none");
+  scorePage.classList.add("d-none");
 }
 
 
 //FIXME: revisar este codigo para depurar los signos que aparecen en las preguntas y respuestas
-// function decodeHTML(html) {
-//   let txt = document.createElement("textarea");
-//   txt.innerHTML = html;
-//   return txt.value;
-// }
-// function mostrarPregunta() {
-//   const preguntaActual = preguntas[preguntaIndex];
-//   const decodedQuestion = decodeHTML(preguntaActual.question);
-//   questionElement.innerText = decodedQuestion;
-//   answerButtonsElement.innerHTML = "";
 
+  // Función para decodificar HTML
+  function decodeHTML(html) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
 
 
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
-  homePage.classList.add("hide");
-  scorePageBtn.classList.add("hide");
-  startButton.classList.remove("hide");
-  questionPage.classList.remove("hide");
-  questionContainer.classList.add("hide");
+  homePage.classList.add("d-none");
+  scorePageBtn.classList.add("d-none");
+  startButton.classList.remove("d-none");
+  questionPage.classList.remove("d-none");
+  questionContainer.classList.add("d-none");
+  startGame()
 });
 
-startButton.addEventListener("click", startGame);
+// startButton.addEventListener("click", startGame);
+
 nextButton.addEventListener("click", () => {
-  questionElement.classList.remove("hide");
+  questionElement.classList.remove("d-none");
   currentQuestionIndex++;
   setNextQuestion();
 });
 
 scorePageBtn.addEventListener("click", () => {
-  // homePage.classList.add("hide");
-  questionPage.classList.add("hide");
-  scorePage.classList.remove("hide");
+  // homePage.classList.add("d-none");
+  questionPage.classList.add("d-none");
+  scorePage.classList.remove("d-none");
   scoreText.innerText = `Your score is ${score}`;
 });
 
