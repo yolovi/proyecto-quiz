@@ -52,9 +52,70 @@ button {
     cambiar propiedades de los botones answers
 } */
 
-#restart-btn {
-    margin-left: 3rem;
+#score-text {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
+
+#score-number-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #000000;
+    font-size: 25px;
+    border-radius: 5px;
+    width: 210px;
+    height: 50px;
+    font-weight: bold;
+    border: 2px dashed #000000;
+    transition: 0.3s;
+    background-color: #f0d853;
+    padding: 2px 0 ;
+  }
+  
+
+
+
+#restart-btn {
+    padding: 5px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative; 
+    font-size: 17px;
+    transition: all 250ms;
+    overflow: hidden;
+   }
+   
+#restart-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    background-color: #212121;
+    z-index: -1;
+    /* -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
+    /* box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
+    transition: all 250ms
+   }
+   
+   #restart-btn:hover {
+    color: #e8e8e8;
+   }
+   
+   #restart-btn:hover::before {
+    width: 100%;
+   }
+
+
 
 #puzzle-icon {
     width: 4vw !important;

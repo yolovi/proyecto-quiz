@@ -31,13 +31,12 @@
 
     </header>
 
-    <div class="container d-flex flex-column bd-highlight mb-3  align-items-center" id="home-page">
-        <img src="assets/grunge-question-mark-10 .png" class="img-inicio mt-3" alt="Question quote Responsive image">
-        <button id="take-quiz" class="mt-5">Take the Quiz</button>
+    <div id="home-page" class="container card d-flex flex-column bd-highlight my-5 align-items-center" style="max-width: 15rem">
+        <img src="assets/grunge-question-mark-10 .png" class="img-inicio mt-5" alt="Question quote Responsive image">
+        <button id="take-quiz" class="my-5">Take the Quiz</button>
     </div>
 
-    <div id="question-page" class="d-none container justify-content-center card text-white bg-primary mt-5 mb-3 "
-        style="max-width: 40rem;">
+    <div id="question-page" class="d-none container justify-content-center card text-white bg-primary mt-5 mb-3 " style="max-width: 40rem;">
 
         <div id="question-container" class="d-none card-body">
             <h5 class="card-title mt-2" id="question-title">Question:</h5>
@@ -66,12 +65,17 @@
 
     <div id="score-page" class="d-none container d-flex justify-content-center mb-5">
         <div class="container d-flex card mb-3 justify-content-center align-items-center" style="max-width: 20rem;">
-            <h3 class="card-header">Your Score</h3>
-            <img src="assets/vecteezy_doodle-monster-hand2-_11351601.jpg" alt="imagen doodle monsters" class="mt-2">
+            <!-- <h3 class="card header text-dark px-5 py-2 mt-3">Your Score</h3> -->
+           
             <div class="card-body align-items-center">
-                <h5 id="score-text" class="card-title my-3"></h5> <!-- <span id="score-text"></span> -->
-                <button id="restart-btn" >Go Home</button>
+                <p id="score-text" class="card-title my-3 text-secondary"></p> <!-- <span id="score-text"></span> -->
+                <button id="score-number-btn" class="card-title my-3 d-block"></button>
+               
             </div>
+
+            <img src="assets/vecteezy_doodle-monster-hand2-_11351601.jpg" alt="imagen doodle monsters">
+
+            <button id="restart-btn" class="mt-3 mb-5" >Go Home</button>
         </div>
 
     </div>

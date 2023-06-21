@@ -24,7 +24,9 @@ const questionNumber = document.getElementById("question-number");
 //div Score PAge
 const scorePage = document.getElementById("score-page");
 const scoreText = document.getElementById("score-text");
+const scoreNumber = document.getElementById("score-number-btn")
 const restartBtn = document.getElementById("restart-btn");
+
 
 // Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
@@ -39,9 +41,9 @@ axios
   .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
 
-setTimeout(() => {
-  console.log(apiData);
-}, "1000");
+// setTimeout(() => {
+//   console.log(apiData);
+// }, "1000");
 
 //FUNCIONES
 
@@ -79,7 +81,7 @@ function getQuestions() {
   }, 1000);
 }
 
-getQuestions();
+getQuestions();score
 
 //Ejemplo como desordenar array de manera aleatoria:
 // var myarray=[25, 8, "George", "John"]
@@ -119,28 +121,6 @@ function selectAnswer() {
   }
   // console.log(currentQuestionIndex)
 }
-
-
-// SIN CARD BOOTSTRAP
-// function showQuestion(currentQuestion) {
-//   const decodedQuestion = decodeHTML(currentQuestion.question); // Decodificar la pregunta
-//   questionElement.innerText = `${currentQuestionIndex + 1}. ${decodedQuestion}`;
-//   currentQuestion.allAnswers.forEach((answer) => {
-//     const button = document.createElement("button");
-//     button.innerText = answer.text;
-//     if (answer.correct) {
-//       button.dataset.correct = true;
-//     }
-//     button.addEventListener("click", () => {
-//       if (button.dataset.correct === "true") {
-//         score++;
-//         console.log(score);
-//       }
-//       selectAnswer();
-//     });
-//     answerContainer.appendChild(button);
-//   });
-// }
 
 
 {/* <div class="card" style="width: 18rem;">
@@ -195,7 +175,7 @@ function setNextQuestion() {
 //Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
 function startGame() {
   startButton.classList.add("d-none");
-  currentQuestionIndex = 9;
+  currentQuestionIndex = 0;
   questionContainer.classList.remove("d-none");
   score = 0;
   setNextQuestion();
@@ -239,7 +219,8 @@ scorePageBtn.addEventListener("click", () => {
   // homePage.classList.add("d-none");
   questionPage.classList.add("d-none");
   scorePage.classList.remove("d-none");
-  scoreText.innerText = `Your score is ${score}/10`;
+  scoreText.innerText = `Your score is`;
+  scoreNumber.innerText = `${score}/10`
 });
 
 restartBtn.addEventListener("click", restart);
