@@ -195,7 +195,7 @@ function setNextQuestion() {
 //Esta funcion esta conectada al boton start del quiz. Esconde el boton start al clicar y muestra el contenedor con la primera pregunta:
 function startGame() {
   startButton.classList.add("d-none");
-  currentQuestionIndex = 0;
+  currentQuestionIndex = 9;
   questionContainer.classList.remove("d-none");
   score = 0;
   setNextQuestion();
@@ -239,7 +239,7 @@ scorePageBtn.addEventListener("click", () => {
   // homePage.classList.add("d-none");
   questionPage.classList.add("d-none");
   scorePage.classList.remove("d-none");
-  scoreText.innerText = `Your score is ${score}`;
+  scoreText.innerText = `Your score is ${score}/10`;
 });
 
 restartBtn.addEventListener("click", restart);

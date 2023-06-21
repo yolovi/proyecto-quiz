@@ -1,8 +1,7 @@
 
 body {
-    /* background-image: url("../assets/vecteezy_abstract-seamless-pattern-on-_11278890.jpg") !important; */
+    max-height: fit-content !important;
     background-image: url("../assets/vecteezy_abstract-seamless-pattern.jpg") !important;
-    /* background-repeat: repeat !important; */
     background-size: 0.5 rem !important;
   }
 
@@ -49,6 +48,14 @@ button {
     width: 10vw;
 }
 
+/* .btn-answers {
+    cambiar propiedades de los botones answers
+} */
+
+#restart-btn {
+    margin-left: 3rem;
+}
+
 #puzzle-icon {
-    width: 5vw !important;
+    width: 4vw !important;
 }
