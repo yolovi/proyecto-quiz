@@ -24,9 +24,8 @@ const questionNumber = document.getElementById("question-number");
 //div Score PAge
 const scorePage = document.getElementById("score-page");
 const scoreText = document.getElementById("score-text");
-const scoreNumber = document.getElementById("score-number-btn")
+const scoreNumber = document.getElementById("score-number-btn");
 const restartBtn = document.getElementById("restart-btn");
-
 
 // Creamos las variables con array vacio para la API y para lo que queremos guardar de la API
 
@@ -47,10 +46,8 @@ axios
 
 //FUNCIONES
 
-//TODO: aync await 
+//TODO: aync await
 //TODO: funciones flecha
-//TODO: add decodeURI para los simbolos raros de las preguntas
-//TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
 //TODO: funcion d-none views (opcional). ver diapos clase users-login
 //TODO: EXTRA CLASE. Guardar en el Local Storage cada puntuacion
 //TODO: EXTRA CLASE. Grafica
@@ -81,7 +78,7 @@ function getQuestions() {
   }, 1000);
 }
 
-getQuestions();score
+getQuestions();
 
 //Ejemplo como desordenar array de manera aleatoria:
 // var myarray=[25, 8, "George", "John"]
@@ -107,7 +104,7 @@ function setStatusClass(button) {
 // }
 // }
 
-//FIXME: cambiar starButton.innerText= "Restart" y poner "show Your Score" que te dirija  a la pagina Score y ahi poner el boton restar/play again
+//FIXME: al clicar deberian de cambiar de color a un gris claro las respuests no seleccionadas, que se vea mas grande la seleccionada y dejar en verde la correcta, en rojo si se ha seleccionado la incorrecta
 
 function selectAnswer() {
   Array.from(answerContainer.children).forEach((button) => {
@@ -122,25 +119,21 @@ function selectAnswer() {
   // console.log(currentQuestionIndex)
 }
 
-
-{/* <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> */}
-
+// Función para decodificar HTML
+function decodeHTML(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
 
 function showQuestion(currentQuestion) {
   const decodedQuestion = decodeHTML(currentQuestion.question); // Decodificar la pregunta
   questionElement.innerText = `${currentQuestionIndex + 1}. ${decodedQuestion}`;
-  answerContainer.classList.add("justify-content-center")
+  answerContainer.classList.add("justify-content-center");
   currentQuestion.allAnswers.forEach((answer) => {
     const decodedAnswer = decodeHTML(answer.text); // Decodificar la respuesta
     const button = document.createElement("button");
-    button.classList.add("btn-answers")
+    button.classList.add("btn-answers");
     button.innerText = decodedAnswer;
     if (answer.correct) {
       button.dataset.correct = true;
@@ -155,7 +148,6 @@ function showQuestion(currentQuestion) {
     answerContainer.appendChild(button);
   });
 }
-
 
 console.log(score);
 
@@ -186,17 +178,6 @@ function restart() {
   scorePage.classList.add("d-none");
 }
 
-
-//FIXME: revisar este codigo para depurar los signos que aparecen en las preguntas y respuestas
-
-  // Función para decodificar HTML
-  function decodeHTML(html) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-  }
-
-
 //EVENT LISTENER
 btnTakeQuiz.addEventListener("click", () => {
   homePage.classList.add("d-none");
@@ -204,10 +185,8 @@ btnTakeQuiz.addEventListener("click", () => {
   startButton.classList.remove("d-none");
   questionPage.classList.remove("d-none");
   questionContainer.classList.add("d-none");
-  startGame()
+  startGame();
 });
-
-// startButton.addEventListener("click", startGame);
 
 nextButton.addEventListener("click", () => {
   questionElement.classList.remove("d-none");
@@ -220,31 +199,7 @@ scorePageBtn.addEventListener("click", () => {
   questionPage.classList.add("d-none");
   scorePage.classList.remove("d-none");
   scoreText.innerText = `Your score is`;
-  scoreNumber.innerText = `${score}/10`
+  scoreNumber.innerText = `${score}/10`;
 });
 
 restartBtn.addEventListener("click", restart);
-// scoreButton.addEventListener("click", showScore )
-
-
-//TODO: EXTRA: implementar una funcion que genere imagenes random al clicar en next y ponerlas como cabecera de la card. Codigo de ejemplo:
-
-// HTML:
-//   <img id="random-image" src="" alt="Imagen Random Abstracta"> 
-//   <button id="generate-button">Generar Imagen</button>
-// JS:  
-
-//     const generateButton = document.getElementById("generate-button");
-//     const randomImage = document.getElementById("random-image");
-    
-//     generateButton.addEventListener("click", () => {
-//       fetch("https://source.unsplash.com/random/800x600/?abstract")
-//         .then(response => {
-//           randomImage.src = response.url;
-//         })
-//         .catch(error => {
-//           console.error("Error al obtener la imagen random:", error);
-//         });
-//     });
-
-

@@ -1,13 +1,12 @@
-
 body {
     max-height: fit-content !important;
     background-image: url("../assets/vecteezy_abstract-seamless-pattern.jpg") !important;
     background-size: 0.5 rem !important;
-  }
+}
 
-  header {
+header {
     background-color: white;
-  }
+}
 
 /* BUTTONS */
 
@@ -23,16 +22,16 @@ button {
     box-shadow: 3px 3px #fafafa;
     cursor: pointer;
     margin: 35px 0;
-  }
-  
-  button:active {
+}
+
+button:active {
     box-shadow: none;
     transform: translate(3px, 3px);
-  }
+}
 
 
 
-  .d-none {
+.d-none {
     display: none;
 }
 
@@ -49,7 +48,7 @@ button {
 }
 
 /* .btn-answers {
-    cambiar propiedades de los botones answers
+    cambiar propiedades de los botones answers para que al clicar cambien de color, mas claras la seleccionada
 } */
 
 #score-text {
@@ -73,10 +72,8 @@ button {
     border: 2px dashed #000000;
     transition: 0.3s;
     background-color: #f0d853;
-    padding: 2px 0 ;
-  }
-  
-
+    padding: 2px 0;
+}
 
 
 #restart-btn {
@@ -86,12 +83,12 @@ button {
     color: #212121;
     z-index: 1;
     background: #e8e8e8;
-    position: relative; 
+    position: relative;
     font-size: 17px;
     transition: all 250ms;
     overflow: hidden;
-   }
-   
+}
+
 #restart-btn::before {
     content: "";
     position: absolute;
@@ -105,16 +102,15 @@ button {
     /* -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
     /* box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
     transition: all 250ms
-   }
-   
-   #restart-btn:hover {
-    color: #e8e8e8;
-   }
-   
-   #restart-btn:hover::before {
-    width: 100%;
-   }
+}
 
+#restart-btn:hover {
+    color: #e8e8e8;
+}
+
+#restart-btn:hover::before {
+    width: 100%;
+}
 
 
 #puzzle-icon {
