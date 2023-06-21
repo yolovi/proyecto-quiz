@@ -50,7 +50,8 @@ setTimeout(() => {
 //TODO: add decodeURI para los simbolos raros de las preguntas
 //TODO: en el div score crear un boton para pintar la puntuacion al final del quizz con la ultima pregunta
 //TODO: funcion d-none views (opcional). ver diapos clase users-login
-//TODO: EXTRA. Guardar en el Local Storage cada puntuacion
+//TODO: EXTRA CLASE. Guardar en el Local Storage cada puntuacion
+//TODO: EXTRA CLASE. Grafica
 //TODO: EXTRA. navbar
 
 // NUEVA ESTRUCTURA: guardar question & answers en nuevo [] con {} dentro con key correct con valor true/false.
@@ -119,12 +120,11 @@ function selectAnswer() {
   // console.log(currentQuestionIndex)
 }
 
+
+// SIN CARD BOOTSTRAP
 // function showQuestion(currentQuestion) {
-//   questionElement.innerText = `${currentQuestionIndex + 1}. ${
-//     currentQuestion.question
-//   }`;
-//   // console.log(questionNumber)
-//   // console.log(currentQuestionIndex)
+//   const decodedQuestion = decodeHTML(currentQuestion.question); // Decodificar la pregunta
+//   questionElement.innerText = `${currentQuestionIndex + 1}. ${decodedQuestion}`;
 //   currentQuestion.allAnswers.forEach((answer) => {
 //     const button = document.createElement("button");
 //     button.innerText = answer.text;
@@ -142,12 +142,26 @@ function selectAnswer() {
 //   });
 // }
 
+
+{/* <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> */}
+
+
 function showQuestion(currentQuestion) {
   const decodedQuestion = decodeHTML(currentQuestion.question); // Decodificar la pregunta
   questionElement.innerText = `${currentQuestionIndex + 1}. ${decodedQuestion}`;
+  answerContainer.classList.add("justify-content-center")
   currentQuestion.allAnswers.forEach((answer) => {
+    const decodedAnswer = decodeHTML(answer.text); // Decodificar la respuesta
     const button = document.createElement("button");
-    button.innerText = answer.text;
+    button.classList.add("btn-answers")
+    button.innerText = decodedAnswer;
     if (answer.correct) {
       button.dataset.correct = true;
     }
@@ -161,6 +175,7 @@ function showQuestion(currentQuestion) {
     answerContainer.appendChild(button);
   });
 }
+
 
 console.log(score);
 
@@ -229,3 +244,26 @@ scorePageBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", restart);
 // scoreButton.addEventListener("click", showScore )
+
+
+//TODO: EXTRA: implementar una funcion que genere imagenes random al clicar en next y ponerlas como cabecera de la card. Codigo de ejemplo:
+
+// HTML:
+//   <img id="random-image" src="" alt="Imagen Random Abstracta"> 
+//   <button id="generate-button">Generar Imagen</button>
+// JS:  
+
+//     const generateButton = document.getElementById("generate-button");
+//     const randomImage = document.getElementById("random-image");
+    
+//     generateButton.addEventListener("click", () => {
+//       fetch("https://source.unsplash.com/random/800x600/?abstract")
+//         .then(response => {
+//           randomImage.src = response.url;
+//         })
+//         .catch(error => {
+//           console.error("Error al obtener la imagen random:", error);
+//         });
+//     });
+
+

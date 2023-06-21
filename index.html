@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head class="p-3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">    <title>Quiz</title>
@@ -23,8 +23,9 @@
     </div> -->
 
 <!-- TODO: GIF con lo que hace el quiz README -->
-    <header>
-        <h1>QUIZ</h1>
+    <header class="d-flex p-3">
+        <img id="puzzle-icon" src="assets/puzzle-piece-hand-drawn.png" alt="question icon" class="mx-3" >
+        <h1 class=>IT'S QUIZ TIME !</h1>
     </header>
 
     <hr>
@@ -32,26 +33,47 @@
     <div class="container d-flex flex-column bd-highlight mb-3  align-items-center" id="home-page">
 
 
-        <h2 id="home" class="mt-5"> QUIZ TIME</h2>
+        <!-- <h2 id="home" class="text-dark bg-light px-5 py-2 mt-5"> IT'S QUIZ TIME !</h2> -->
         <!-- FIXME: enlazar imagen: -->
         <img  src="assets/grunge-question-mark-10 .png" class="img-inicio mt-3" alt="Question quote Responsive image">
         <button id="take-quiz" class="mt-5">Take the Quiz</button>
 
     </div>
 
-    <div id="question-page" class="d-none">
 
-        <div id="question-container" class="d-none">
-            <div id="question-title">Question:</div>
-            <div id="question-number"></div>
-            <div id="question"></div>
-            <div id="answer-container"></div>
+    <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
+      </div> -->
 
-        <div class="controls">
+
+      <!-- <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Primary card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div> -->
+
+    <div id="question-page" class="d-none container justify-content-center card text-white bg-primary mt-5 mb-3 " style="max-width: 40rem;">
+
+        <div id="question-container" class="d-none card-body">
+            <h5 class="card-title mt-2" id="question-title">Question:</h5>
+            <hr>
+            <div id="question-number"></div>
+            <p class="card-text mb-3" id="question"></p>
+            <div class="d-flex flex-column justify-content-center mx-auto mt-3 mb-3"  style="max-width: 30rem;" id="answer-container"></div>
+        </div>
+      
+
+        <div class="controls container">
             <button id="start-btn">Start</button>
-            <button id="next-btn" class="d-none">Next</button>
-            <button id="score-page-btn" class="d-none">Your Score</button>
+            <button id="next-btn" class="d-none mb-5">Next</button>
+            <button id="score-page-btn" class="d-none  mb-5">Your Score</button>
         </div>
    
     </div>

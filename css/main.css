@@ -1,18 +1,16 @@
-.d-none {
-    display: none;
-}
 
-.correct {
-    color: rgb(32, 127, 59);
-}
+body {
+    /* background-image: url("../assets/vecteezy_abstract-seamless-pattern-on-_11278890.jpg") !important; */
+    background-image: url("../assets/vecteezy_abstract-seamless-pattern.jpg") !important;
+    /* background-repeat: repeat !important; */
+    background-size: 0.5 rem !important;
+  }
 
-.wrong {
-    color: rgb(216, 25, 25);
-}
+  header {
+    background-color: white;
+  }
 
-.img-inicio{
-    width: 10vw;
-}
+/* BUTTONS */
 
 button {
     font-family: monospace;
@@ -32,3 +30,25 @@ button {
     box-shadow: none;
     transform: translate(3px, 3px);
   }
+
+
+
+  .d-none {
+    display: none;
+}
+
+.correct {
+    color: rgb(32, 127, 59);
+}
+
+.wrong {
+    color: rgb(216, 25, 25);
+}
+
+.img-inicio {
+    width: 10vw;
+}
+
+#puzzle-icon {
+    width: 5vw !important;
+}
