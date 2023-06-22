@@ -1,6 +1,4 @@
-//El Quiz constará de 10 preguntas. Cada pregunta tendrá 4 opciones y sólo una de ellas será la correcta.
-// Deberán ser preguntas que vengan de https://opentdb.com/ o otras API’s que busqueis.Utiliza AXIOS
-// La aplicación tendrá que ser una SPA (single-page application). Sólo una pregunta cada vez en pantalla.
+//QUIZ SPA API AXIOS
 
 //GET_ITEMS
 
@@ -36,7 +34,6 @@ axios
   .then((res) => (apiData = res.data.results))
   .catch((err) => console.error(err));
 
-
 //FUNCIONES
 
 function getQuestions() {
@@ -57,7 +54,6 @@ function getQuestions() {
         }),
       };
     });
-    console.log("apiDataNew", apiDataNew);
   }, 1000);
 }
 
@@ -69,7 +65,7 @@ function setStatusClass(button) {
   } else {
     button.classList.add("wrong");
   }
-  button.disabled = true; 
+  button.disabled = true;
 }
 
 function selectAnswer() {
@@ -106,7 +102,6 @@ function showQuestion(currentQuestion) {
     button.addEventListener("click", () => {
       if (button.dataset.correct === "true") {
         score++;
-        console.log(score);
       }
       selectAnswer();
     });

@@ -1,0 +1,18 @@
+NOTAS 
+
+TODO:/FIXME:
+- Poner en el README un ROADMAP con las cosas que hay que corregir y las que se quieren implementar.
+- Revisar las variables globales que solo se utilizan en una funcion para meterla en esa funcion.
+- lo mismo con la peticion de la API si solo se va a utilizar para recoger la informacion ponerla en la funcion donde se va a utilizar.
+- poner en la pagina de score. boton jugar de nuevo junto al de home (home tendra una card con take the quizz y otra card con las graficas)
+- hacer una funcin que vacie el contenedor de preguntas y respuestas al clicar your score. Asi cuando vuelva a jugar empezara desde la primera pregunta
+- cambiar propiedades de los botones answers para que al clicar cambien de color, asi sabemos cual es la opcion seleccionada y si coincide o no con la correcta
+- revisar el responsive mobile first
+
+
+ROADMAP:
+- hacer un logging de usuarios para poder guardar la puntuacion por usuarios
+- hacer un nav con las paginas
+- Guardar la puntuacion en el local storage.
+- Hacer la grafica de los extras
+
